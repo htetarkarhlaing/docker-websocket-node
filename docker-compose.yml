@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+  api:
+    build: .
+    ports:
+      - 443:443
+    environment:
+      PORT: 443
