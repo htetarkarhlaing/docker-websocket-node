@@ -4,6 +4,6 @@ services:
   api:
     build: .
     ports:
-      - 443:443
+      - 3000:3000
     environment:
-      PORT: 443
+      PORT: 3000

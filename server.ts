@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 const PORT = parseInt(process.env.PORT.toString(), 10) || 8000;
 
 const server = app.listen(PORT, () => {
-	console.log("Server is started.");
+	console.log(`Server is started on PORT = ${PORT}`);
 });
 
 server.on("upgrade", (request, socket, head) => {
@@ -43,7 +43,7 @@ wsServer.on("connection", (socket) => {
 		sendAll(incomingMsg);
 	});
 
-	socket.send("Hello Flutter!");
+	socket.send("Hello from web socket server!");
 });
 
 // send message to all
