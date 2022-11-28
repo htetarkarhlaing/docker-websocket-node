@@ -18,6 +18,34 @@ app.get("/", (req, res) => {
 	res.send("hello");
 });
 
+app.post("/new-event", (req, res) => {
+	let message = req.body;
+	try {
+		sendAll(JSON.stringify(message));
+		res.json({
+			meta: {
+				success: true,
+				status: 200,
+			},
+			body: {
+				message,
+				origin: req.headers.origin,
+			},
+		});
+	} catch (err) {
+		res.json({
+			meta: {
+				success: false,
+				status: 500,
+			},
+			body: {
+				message: err,
+				origin: req.headers.origin,
+			},
+		});
+	}
+});
+
 const PORT = parseInt(process.env.PORT.toString(), 10) || 8000;
 
 const server = app.listen(PORT, () => {
@@ -48,6 +76,7 @@ wsServer.on("connection", (socket) => {
 
 // send message to all
 const sendAll = (message: any) => {
+	console.log(message);
 	for (let i = 0; i < CLIENTS.length; i++) {
 		CLIENTS[i].send(message);
 	}
